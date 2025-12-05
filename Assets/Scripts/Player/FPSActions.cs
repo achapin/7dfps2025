@@ -118,6 +118,24 @@ public partial class @FPSActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Button"",
+                    ""id"": ""a738dca1-97f8-43be-9cf6-70d932c207a9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""ddb5b282-561c-4095-a717-7c56aa8c8f82"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -208,6 +226,28 @@ public partial class @FPSActions: IInputActionCollection2, IDisposable
                     ""action"": ""AimY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bebf931a-eea2-4648-85af-46a78184d6ff"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8aa6b0b-a1f1-4e82-a4d5-d269d18248f5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -219,6 +259,8 @@ public partial class @FPSActions: IInputActionCollection2, IDisposable
         m_FPSActionMap_Movement = m_FPSActionMap.FindAction("Movement", throwIfNotFound: true);
         m_FPSActionMap_AimX = m_FPSActionMap.FindAction("AimX", throwIfNotFound: true);
         m_FPSActionMap_AimY = m_FPSActionMap.FindAction("AimY", throwIfNotFound: true);
+        m_FPSActionMap_Aim = m_FPSActionMap.FindAction("Aim", throwIfNotFound: true);
+        m_FPSActionMap_Fire = m_FPSActionMap.FindAction("Fire", throwIfNotFound: true);
     }
 
     ~@FPSActions()
@@ -302,6 +344,8 @@ public partial class @FPSActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_FPSActionMap_Movement;
     private readonly InputAction m_FPSActionMap_AimX;
     private readonly InputAction m_FPSActionMap_AimY;
+    private readonly InputAction m_FPSActionMap_Aim;
+    private readonly InputAction m_FPSActionMap_Fire;
     /// <summary>
     /// Provides access to input actions defined in input action map "FPSActionMap".
     /// </summary>
@@ -325,6 +369,14 @@ public partial class @FPSActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "FPSActionMap/AimY".
         /// </summary>
         public InputAction @AimY => m_Wrapper.m_FPSActionMap_AimY;
+        /// <summary>
+        /// Provides access to the underlying input action "FPSActionMap/Aim".
+        /// </summary>
+        public InputAction @Aim => m_Wrapper.m_FPSActionMap_Aim;
+        /// <summary>
+        /// Provides access to the underlying input action "FPSActionMap/Fire".
+        /// </summary>
+        public InputAction @Fire => m_Wrapper.m_FPSActionMap_Fire;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -360,6 +412,12 @@ public partial class @FPSActions: IInputActionCollection2, IDisposable
             @AimY.started += instance.OnAimY;
             @AimY.performed += instance.OnAimY;
             @AimY.canceled += instance.OnAimY;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
+            @Fire.started += instance.OnFire;
+            @Fire.performed += instance.OnFire;
+            @Fire.canceled += instance.OnFire;
         }
 
         /// <summary>
@@ -380,6 +438,12 @@ public partial class @FPSActions: IInputActionCollection2, IDisposable
             @AimY.started -= instance.OnAimY;
             @AimY.performed -= instance.OnAimY;
             @AimY.canceled -= instance.OnAimY;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
+            @Fire.started -= instance.OnFire;
+            @Fire.performed -= instance.OnFire;
+            @Fire.canceled -= instance.OnFire;
         }
 
         /// <summary>
@@ -441,5 +505,19 @@ public partial class @FPSActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAimY(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Aim" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAim(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Fire" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFire(InputAction.CallbackContext context);
     }
 }
